@@ -1,0 +1,16 @@
+com/silva/repository/RoleRepository.class
+com/silva/configuration/SecurityConfiguration$EmployerSecurityConfig.class
+com/silva/JobPortalApplication.class
+com/silva/model/User.class
+com/silva/service/UserServiceImpl.class
+com/silva/model/Role.class
+com/silva/controller/JobPostingController.class
+com/silva/configuration/SecurityConfiguration$ApplicantSecurityConfig.class
+com/silva/repository/UserRepository.class
+com/silva/repository/JobPostingRepository.class
+com/silva/configuration/SecurityConfiguration.class
+com/silva/controller/UserController.class
+com/silva/controller/JobPostingRestController.class
+com/silva/model/JobPosting.class
+com/silva/configuration/WebMvcConfig.class
+com/silva/service/UserService.class
