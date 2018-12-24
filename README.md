@@ -7,6 +7,7 @@ An Employer can create job postings and view only their own job postings.
 Applicants can view all postings.
 
 Applicant login Page: /user/applicant/login
+
 Employer Login page: /user/employer/login
 
 
