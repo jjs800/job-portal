@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>Job Posting Details</title>
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container">
-        <ol class="breadcrumb">
-            <li><a href="#" th:href="${'/jobpostings'}">Home</a></li>
-        </ol>
         <div class="row"><h2>Job Posting Details</h2></div>
         <form class="form-horizontal">
             <div class="form-group">
@@ -31,8 +29,8 @@
                 </div>
             </div>            
         </form>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+        <a th:href="${'/user/employer/jobpostings'}" class="btn btn-default">Job Postings</a>
+        <a th:href="@{/user/employer/logout}">Sign out</a>
+    </div>    
 </body>
 </html>

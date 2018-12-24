@@ -6,21 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.silva.model.JobPosting;
 import com.silva.model.User;
+import com.silva.repository.JobPostingRepository;
 import com.silva.service.UserServiceImpl;
 
 
 @Controller
 public class UserController {
+	
 	@Autowired
 	 private UserServiceImpl userService;
-	 
-	 @RequestMapping(value= {"/user/applicant/login"}, method=RequestMethod.GET)
+	
+	@Autowired
+	private JobPostingRepository jobPostingRepository;
+	
+	@RequestMapping(value= {"/user/applicant/login"}, method=RequestMethod.GET)
 	 public ModelAndView login() {
 	  ModelAndView model = new ModelAndView();	  
 	  model.setViewName("user/applicant/login");
@@ -135,6 +145,50 @@ public class UserController {
 	 	ModelAndView model = new ModelAndView();
 	  	model.setViewName("redirect:/user/employer/login?logout");
 	  	return model;	 
-	 }
+	 }	 
+	 
+	@GetMapping("/user/employer/jobposting/new")
+	public String newJobPosting(Model model) {
+		model.addAttribute("jobposting", new JobPosting());		
+		return "/user/employer/jobpostingform";
+	}
+	
+	@PostMapping("/user/employer/jobposting")
+	public String createJobPosting(JobPosting jobPosting, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName()); 
+		jobPosting.setEmployerId(user.getId());
+		jobPosting.setEmployerName(user.getFirstname() + " " + user.getLastname());
+		jobPostingRepository.save(jobPosting);
+		return "redirect:/user/employer/jobposting/" + jobPosting.getId();
+	}
+	
+	@GetMapping("/user/employer/jobposting/{id}")
+	public String getJobPostingById(@PathVariable Long id, Model model) {
+		model.addAttribute("jobposting", jobPostingRepository.findById(id).orElse(new JobPosting()));
+		return "/user/employer/jobposting";
+	}
+	
+	@GetMapping("/user/applicant/jobposting/{id}")
+	public String getJobPostingByIdForApplicant(@PathVariable Long id, Model model) {
+		model.addAttribute("jobposting", jobPostingRepository.findById(id).orElse(new JobPosting()));
+		return "/user/applicant/jobposting";
+	}
+	
+	@GetMapping("/user/applicant/jobpostings")
+	public String getJobPostings(Model model) {
+		model.addAttribute("jobpostings", jobPostingRepository.findAll());
+		return "/user/applicant/jobpostings";
+	}
+	
+	@GetMapping("/user/employer/jobpostings")
+	public String getEmployerJobPostings(Model model) {		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		int empId = user.getId();
+		  
+		model.addAttribute("jobpostings", jobPostingRepository.findJobPostingsByEmployerId(empId));
+		return "/user/employer/jobpostings";
+	}
 
 }

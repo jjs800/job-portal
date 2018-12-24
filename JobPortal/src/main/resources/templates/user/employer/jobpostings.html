@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>Job Postings</title>
-    <link href="../static/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container">
@@ -19,12 +20,11 @@
                 <td th:text="${jobposting.id}">Job Posting ID</td>
                 <td th:text="${jobposting.title}">Job Title</td>
                 <td th:text="${jobposting.description}">Job Posting Description</td>
-                <td><a class="btn btn-default" href="#" th:href="${'/jobposting/' + jobposting.id}">View</a> </td>                
+                <td><a class="btn btn-default" href="#" th:href="${'/user/employer/jobposting/' + jobposting.id}">View</a> </td>                
             </tr>
-        </table>
-        <a th:href="${'/jobposting/new'}" class="btn btn-default">New</a>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="../static/js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+        </table>        
+        <a th:href="${'/user/employer/jobposting/new'}" class="btn btn-default">New</a>
+        <a th:href="@{/user/employer/logout}">Sign out</a>
+    </div>    
 </body>
 </html>

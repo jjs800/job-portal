@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Job Posting</title>
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
 </head>
 <body>
 <h2>Create Job Posting</h2>
 <div class="container">
-    <form th:object="${jobposting}" th:action="@{/jobposting}" method="post">
+    <form th:object="${jobposting}" th:action="@{/user/employer/jobposting}" method="post">
         <input type="hidden" th:field="*{id}" />
         <div class="form-group">
             <label>Title</label>
@@ -21,7 +22,5 @@
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
